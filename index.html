@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web-Theremin</title>
+    <link rel="stylesheet" href="app.css">
+    <script src="app.js"></script>
+</head>
+
+<body>
+    <div class="application">
+        <div>
+            <h1> Oscillator Generator </h1>
+        </div>
+        <div class="osc-controls">
+            <form>
+                <input id="on-off" type="button" value="start">
+                <span>Click to start oscillator</span>
+                <p>Use mouser to modify frequency</p>
+                <input id="xPos" type="text" />
+                <input id="yPos" type="text" />
+            </form>
+        </div>
+        <div class="osc-controls">
+            <h2>Waveform</h2>
+            <ul id="oscillator-list">
+                <li id="sawtooth">sawtooth</li>
+                <li id="sine"> sine</li>
+                <li id="triangle">triangle</li>
+                <li id="square">square</li>
+            </ul>
+        </div>
+        <div>
+            <p>JavaScript for Sound Artists Demo</p>
+        </div>
+    </div>
+</body>
+
+</html>
