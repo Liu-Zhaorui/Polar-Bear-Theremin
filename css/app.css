@@ -1,11 +1,12 @@
 body {
-    background-color: orange;
+    background-color: rgba(0, 81, 255, 0.658);
     font-family: "Arial";
 }
 
 .application {
-    width: 550px;
+    width: 1000px;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 p,
@@ -15,8 +16,115 @@ input {
     font-size: 1.5em;
 }
 
-div {
-    padding: 20px;
+.title {
+    width: 1000px;
+    padding: 20px 0 30px;
+}
+
+.title h1 {
+    margin: 0;
+    font-size: 50px;
+    text-align: center;
+    color: #ffffff;
+
+}
+
+.application .bg {
+    padding: 300px 0 0;
+    background-image: url(../image/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 25px;
+}
+
+.application .bg .bear {
+    width: 200px;
+    height: 100px;
+    padding: 0;
+    margin: 0 400px;
+    background: url(../image/bear.png) no-repeat;
+    animation: bear 1s steps(8) infinite, move 3s ease forwards;
+}
+
+@keyframes bear {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: -1600px 0;
+    }
+}
+
+@keyframes move {
+    0% {
+        transform: translate(-800px, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+.application .bg .bear:hover {
+    animation-duration: 0.5s;
+}
+
+.osc-controls {
+    float: left;
+    width: 496px;
+    height: 200px;
+    margin: 20px 0;
+    border-style: solid;
+    border-color: #BC6527;
+    border-width: 2px;
+    border-radius: 10px;
+}
+
+.osc-controls form {
+    margin-top: 20px;
+    padding: 0 39px;
+}
+
+#on-off {
+    background-color: hotpink;
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.osc-controls form span {
+    font-size: 24px;
+}
+
+.osc-controls form div {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.osc-controls form p {
+    margin: 10px 0 30px 0;
+    font-size: 20px;
+}
+
+.osc-controls form input {
+    width: 100px;
+    margin-right: 30px;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: rgb(88, 88, 88);
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 0;
+}
+
+.osc-controls h2 {
+    margin: 20px 0;
+    padding: 0;
+    text-align: center;
 }
 
 #sawtooth {
@@ -35,23 +143,29 @@ div {
     background-color: #b85635;
 }
 
-.osc-controls {
-    border-style: solid;
-    border-color: #BC6527;
-    border-width: 2px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-
 #oscillator-list {
-    padding-left: 0;
+    margin: 20px 0;
+    padding: 0 80px;
 }
 
 #oscillator-list li {
+    padding: 2px 0;
     list-style: none;
+    text-align: center;
     color: white;
 }
 
 .selected-waveform {
     outline: 2px solid black;
+}
+
+.foot {
+    float: left;
+    width: 1000px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.foot p {
+    margin: 20px 0 10px 0;
 }

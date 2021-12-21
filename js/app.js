@@ -1,4 +1,5 @@
 "use strict";
+alert('Please turn down the volume before starting!');
 function audioContextCheck() {
     if (typeof AudioContext !== "undefined") {
         return new AudioContext();
@@ -67,7 +68,7 @@ window.onload = function () {
             gainNode.gain.value = volValue / 100;
             console.log("Oscillator is playing. Frequency value is " + osc.frequency.value);
             console.log("Oscillator is playing. Volume value is " + gainNode.gain.value);
-            spanslide.innerHTML = "Use mouser to modify frequency: " + osc.frequency.value + "Hz";
+            spanslide.innerHTML = "Frequency: " + osc.frequency.value + "Hz";
             osc.type = selectedWaveform;
         }
     }, 50);
@@ -87,7 +88,7 @@ window.onload = function () {
             osc.start(audioContext.currentTime);
             onOff.value = "stop";
             span.innerHTML = "Click to stop oscillator";
-            spanslide.innerHTML = "Use mouser to modify frequency: " + osc.frequency.value + "Hz";
+            spanslide.innerHTML = "Frequency: " + osc.frequency.value + "Hz";
             /*_____________________________Otherwise stop it and reset osc to false for next time.*/
         } else {
             osc.stop(audioContext.currentTime);
