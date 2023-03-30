@@ -113,7 +113,7 @@ window.onload = function () {
             osc.connect(gainNode); // gainNode控制振荡器音量
             osc.start(audioContext.currentTime);
             onOff.value = "stop";
-            span.innerHTML = "Click to stop oscillator";
+            span.innerHTML = "Click to stop";
             spanslide.innerHTML = "Frequency: " + osc.frequency.value + "Hz";
             /*_____________________________Otherwise stop it and reset osc to false for next time.*/
         } else {
@@ -121,7 +121,7 @@ window.onload = function () {
             osc = false;
             gainNode = false;
             onOff.value = "start";
-            span.innerHTML = "Click to start oscillator";
+            span.innerHTML = "Click to start";
         }
         /*_________________________________END Conditional statement to check if osc is TRUE or FALSE*/
     });
