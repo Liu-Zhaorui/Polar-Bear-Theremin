@@ -1,5 +1,4 @@
 "use strict";
-alert('Please turn down the volume before starting!');
 function audioContextCheck() {
     if (typeof AudioContext !== "undefined") {
         return new AudioContext();
@@ -14,20 +13,47 @@ function audioContextCheck() {
         throw new Error('AudioContext not supported')
     }
 }
+
 var audioContext = audioContextCheck();
+
+var sound = audioBatchLoader({
+    kick: "https://ccmusic-database.github.io/demo/ccm/8/glissando_down_05.wav",
+    snare: "https://ccmusic-database.github.io/demo/ccm/8/glissando_up_03.wav",
+    hihat: "https://ccmusic-database.github.io/demo/ccm/8/slide_dianzhi_03.wav",
+    shaker: "https://ccmusic-database.github.io/demo/ccm/8/horse_03.wav"
+
+});
+
 window.onload = function () {
     var onOff = document.getElementById("on-off");
     /*_____________________________________BEGIN set initial osc state to false*/
     var osc = false;
-    var gainNode = false;
+    var gainNode = false; // 控制音量
     var span = document.getElementsByTagName("span")[0];
-    var freqValue = document.getElementsByTagName("input")[1].value; // 定义鼠标x轴位置坐标为频率值
-    var volValue = document.getElementsByTagName("input")[2].value;
+    var freqValue = document.getElementsByTagName("input")[1].value; // 定义变量来存储鼠标x轴位置坐标为频率值
+    var volValue = document.getElementsByTagName("input")[2].value; // 定义变量来存储鼠标y轴位置坐标为音量
     var spanslide = document.getElementsByTagName("p")[0];
     var selectedWaveform = "sine";
     var waveformTypes = document.getElementsByTagName('li');
     var defultWaveformElement = document.getElementById(selectedWaveform);
     defultWaveformElement.classList.add("selected-waveform");
+    var kick = document.getElementById("kick");
+    var snare = document.getElementById("snare");
+    var hihat = document.getElementById("hihat");
+    var shaker = document.getElementById("shaker");
+    kick.addEventListener("click", function() {
+        sound.kick.play();
+    });
+    snare.addEventListener("click", function() {
+        sound.snare.play();
+    });
+    hihat.addEventListener("click", function() {
+        sound.hihat.play();
+    });
+    shaker.addEventListener("click", function() {
+        sound.shaker.play();
+    });
+
     function select() {
         var selectedWaveformElement = document.getElementById(this.id);
         selectedWaveform = document.getElementById(this.id).id;
@@ -62,13 +88,13 @@ window.onload = function () {
         if (!osc) {
             console.log("Oscillator is stopped. Waiting for oscillator to start");
         } else {
-            freqValue = document.getElementsByTagName("input")[1].value;
-            volValue = document.getElementsByTagName("input")[2].value;
-            osc.frequency.value = freqValue / 2;
-            gainNode.gain.value = volValue / 100;
+            freqValue = document.getElementsByTagName("input")[1].value; // 调用变量来存储鼠标x轴位置坐标为频率值
+            volValue = document.getElementsByTagName("input")[2].value; // 调用变量来存储鼠标y轴位置坐标为音量
+            osc.frequency.value = freqValue / 2; // 音高除二
+            gainNode.gain.value = volValue / 3000;
             console.log("Oscillator is playing. Frequency value is " + osc.frequency.value);
             console.log("Oscillator is playing. Volume value is " + gainNode.gain.value);
-            spanslide.innerHTML = "Frequency: " + osc.frequency.value + "Hz";
+            spanslide.innerHTML = "Frequency: " + osc.frequency.value + "Hz"; // 实时显示xy轴数据
             osc.type = selectedWaveform;
         }
     }, 50);
@@ -78,13 +104,13 @@ window.onload = function () {
         /*_________________________________BEGIN Conditional statement to check if osc is TRUE or FALSE*/
         if (!osc) { /*_____________________Is osc false? If so then create and assign oscillator to osc and play it.*/
             osc = audioContext.createOscillator();
-            gainNode = audioContext.createGain();
+            gainNode = audioContext.createGain(); // 调用gainNode功能控制音量
             osc.type = "sine";
             osc.frequency.value = freqValue / 2;
-            gainNode.gain.value = volValue / 100;
+            gainNode.gain.value = volValue / 2000;
             osc.connect(audioContext.destination);
-            gainNode.connect(audioContext.destination);
-            osc.connect(gainNode);
+            gainNode.connect(audioContext.destination); // 同81
+            osc.connect(gainNode); // gainNode控制振荡器音量
             osc.start(audioContext.currentTime);
             onOff.value = "stop";
             span.innerHTML = "Click to stop oscillator";
@@ -100,3 +126,43 @@ window.onload = function () {
         /*_________________________________END Conditional statement to check if osc is TRUE or FALSE*/
     });
 };
+
+function audioFileLoader(fileDirectory) {
+    var soundObj = {};
+    var playSound = undefined;
+    var getSound = new XMLHttpRequest();
+    soundObj.fileDirectory = fileDirectory;
+    getSound.open("GET", soundObj.fileDirectory, true);
+    getSound.responseType = "arraybuffer";
+    getSound.onload = function() {
+        audioContext.decodeAudioData(getSound.response, function(buffer) {
+            soundObj.soundToPlay = buffer;
+
+        });
+    };
+
+    getSound.send();
+
+    soundObj.play = function(time) {
+        playSound = audioContext.createBufferSource();
+        playSound.buffer = soundObj.soundToPlay;
+        playSound.connect(audioContext.destination);
+        playSound.start(audioContext.currentTime + time || audioContext.currentTime);
+    };
+
+    soundObj.stop = function(time) {
+        playSound.stop(audioContext.currentTime + time || audioContext.currentTime);
+    };
+    return soundObj;
+}
+
+function audioBatchLoader(obj) {
+
+    for (var prop in obj) {
+        obj[prop] = audioFileLoader(obj[prop]);
+
+    }
+
+    return obj;
+
+}
