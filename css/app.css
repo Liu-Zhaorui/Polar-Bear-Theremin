@@ -25,7 +25,7 @@ input {
 }
 
 .title {
-    width: 1000px;
+    width: 100%;
     padding: 20px 0 30px;
 }
 
@@ -81,7 +81,7 @@ input {
 
 .osc-controls {
     float: left;
-    width: 496px;
+    width: calc(100% - 4px);
     height: 240px;
     margin: 0;
     border-style: solid;
@@ -107,6 +107,7 @@ input {
 
     cursor: pointer;
     position: relative;
+    width: 90px;
     padding: 8px 6px;
     font-size: 20px;
     font-weight: 700;
@@ -184,7 +185,7 @@ input {
 }
 
 .osc-controls form input {
-    width: 100px;
+    width: 10%;
     margin-right: 30px;
     font-size: 20px;
     color: #ffffff;
@@ -262,7 +263,7 @@ input {
 
 .foot {
     float: left;
-    width: 1000px;
+    width: 100%;
     margin: 20px 0;
     text-align: center;
     color: #ffffff;
@@ -277,6 +278,7 @@ input {
     font-size: 28px;
     font-weight: 700;
     color: #ffffff;
+    transition: all 0.5s ease;
 }
 
 .foot p a:hover {
@@ -302,6 +304,15 @@ input {
     width: 200px;
     margin: 0 25px 0;
     cursor: pointer;
+    font-size: 40px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 200px;
+    transition: all 0.5s ease;
+}
+
+.drum-set .drum:hover {
+    color: #37FF8B;
 }
 
 #hihat {
@@ -326,4 +337,23 @@ input {
     background-image: url(../image/4.jpg);
     background-size: cover;
     background-position: center;
+}
+
+@media screen and (max-width: 576px) {
+    .application {
+        width: 100%;
+    }
+
+    .application .bg .bear {
+        margin: 0 25%;
+    }
+
+    .drum-set {
+        height: 510px;
+    }
+    
+    .drum-set .drum {
+        height: 120px;
+        line-height: 120px;
+    }
 }
