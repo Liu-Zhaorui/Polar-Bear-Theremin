@@ -81,7 +81,7 @@ input {
 
 .osc-controls {
     float: left;
-    width: calc(100% - 4px);
+    width: calc(50% - 4px);
     height: 240px;
     margin: 0;
     border-style: solid;
@@ -271,6 +271,7 @@ input {
 
 .foot p {
     margin: 10px 0;
+    padding: 0 30px;
 }
 
 .foot p a {
@@ -346,6 +347,16 @@ input {
 
     .application .bg .bear {
         margin: 0 25%;
+    }
+
+    .application .bg {
+        padding: 200px 0 0;
+        border-radius: 10px;
+    }
+
+    .osc-controls {
+        width: calc(100% - 4px);
+        height: 250px;
     }
 
     .drum-set {
