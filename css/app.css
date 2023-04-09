@@ -317,25 +317,25 @@ input {
 }
 
 #hihat {
-    background-image: url(../image/1.jpg);
+    background-image: url(../image/HH.png);
     background-size: cover;
     background-position: center;
 }
 
 #kick {
-    background-image: url(../image/2.jpeg);
+    background-image: url(../image/Kick.png);
     background-size: cover;
     background-position: center;
 }
 
 #shaker {
-    background-image: url(../image/3.jpg);
+    background-image: url(../image/Tom.png);
     background-size: cover;
     background-position: center;
 }
 
 #snare {
-    background-image: url(../image/4.jpg);
+    background-image: url(../image/Snare.png);
     background-size: cover;
     background-position: center;
 }
