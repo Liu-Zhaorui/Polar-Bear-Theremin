@@ -17,10 +17,10 @@ function audioContextCheck() {
 var audioContext = audioContextCheck();
 
 var sound = audioBatchLoader({
-    kick: "https://ccmusic-database.github.io/demo/ccm/8/glissando_down_05.wav",
-    snare: "https://ccmusic-database.github.io/demo/ccm/8/glissando_up_03.wav",
-    hihat: "https://ccmusic-database.github.io/demo/ccm/8/slide_dianzhi_03.wav",
-    shaker: "https://ccmusic-database.github.io/demo/ccm/8/horse_03.wav"
+    kick: "./sounds/Kick.wav",
+    snare: "./sounds/Snare.wav",
+    hihat: "./sounds/Hi-Hat.wav",
+    shaker: "./sounds/Tom.wav"
 
 });
 
